@@ -113,6 +113,10 @@ def prepare_data(data_path, sample_indices, test_indices, shuffle=True):
         # Shuffle lines in data
         with io.open(data_path, 'r', encoding='utf-8') as f:
             data = [line.splitlines()[0] for line in f]
+        
+        for i in range(len(data)):
+            index = data[i].find('\tCC')
+            data[i] = data[i][0:index]
 
     # Vectorize the data.
     input_texts, target_texts, input_characters, target_characters = vectorize_data(data, sample_indices)
